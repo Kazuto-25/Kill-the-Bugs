@@ -13,9 +13,19 @@ public class UIManager : MonoBehaviour
     public AudioSource UISfx;
     public AudioClip ButtonClip;
 
+    public GameObject player;
+    private Player_Controller playerController;
+    private string playerTag = "Player";
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag(playerTag);
+        playerController = player.GetComponent<Player_Controller>();
+    }
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && playerController.isAlive)
         {
             PauseMenu();
         }
