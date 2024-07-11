@@ -8,16 +8,32 @@ public class MenuBgController : MonoBehaviour
     public float posX;
     public float newPos;
 
+    public bool goingLeft;
+    public bool goingRight;
+
     // Update is called once per frame
     void Update()
     {
-        Time.timeScale = 1;
 
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
-
-        if(transform.position.x > posX )
+        if (goingRight )
         {
-            transform.position = new Vector3(newPos, transform.position.y, transform.position.z);
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
+
+            if (transform.position.x > posX)
+            {
+                transform.position = new Vector3(newPos, transform.position.y, transform.position.z);
+            }
         }
+
+        else if (goingLeft)
+        {
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+
+            if (transform.position.x < newPos)
+            {
+                transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+            }
+        }        
+
     }
 }

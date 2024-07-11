@@ -10,6 +10,7 @@ public class slashBehaviour : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.right * Time.deltaTime * speed);
+        Destroy(gameObject, 0.2f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -21,8 +22,7 @@ public class slashBehaviour : MonoBehaviour
             {
                 playerController.AddKill();
             }
-            Destroy(collision.gameObject, 1.45f);
-            Destroy(gameObject, 0.2f);
+            Destroy(collision.gameObject, 1.45f);           
         }
     }
 }

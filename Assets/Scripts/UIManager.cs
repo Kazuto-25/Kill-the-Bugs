@@ -19,13 +19,17 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag(playerTag);
-        playerController = player.GetComponent<Player_Controller>();
+        if (player != null)
+        {
+            playerController = player.GetComponent<Player_Controller>();
+        }
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && playerController.isAlive)
+        
+
+        if (Input.GetKeyDown(KeyCode.Escape) && playerController.isAlive)
         {
             PauseMenu();
         }
@@ -37,7 +41,7 @@ public class UIManager : MonoBehaviour
         UISfx.Play();
     }
 
-    void PauseMenu()
+    public void PauseMenu()
     {
 
         if(!Paused)

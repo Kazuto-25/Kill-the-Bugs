@@ -37,8 +37,6 @@ public class ObstacleBehaviour : MonoBehaviour
         {
             transform.Translate(Vector2.left * Time.deltaTime * speed);
 
-            Destroy(this.gameObject, 30f);
-
             if (transform.position.x < -100)
             {
                 Destroy(this.gameObject);

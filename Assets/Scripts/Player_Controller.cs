@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
 {
+    [Header("References")]
     public Rigidbody2D rb;
     public Animator playerAnim;
     public Collider2D playerCollider;
     public Animator launchedAnim;
     public GameObject gameOverPanel;
+    public GameObject slashPrefab;
+    public Transform slashSpawnLoc;
+    public GameObject glitchPanel;
 
+    [Header("Audio")]
     public AudioSource playerAudioSrc;
     public AudioClip rewindSfx;
     public AudioClip enemyKillSfx;
@@ -19,11 +24,13 @@ public class Player_Controller : MonoBehaviour
     public AudioClip playerJumpSfx;
     public AudioClip collectJumpSfx;
 
+    [Header("Speed & Time")]
     public float fallSpeed;
     public float upSpeed;
     public float backDrag;
     public float dragDelayTimer;
 
+    [Header("String Names")]
     private string tagOnCelling = "Celing";
     private string tagOnGround = "Ground";
     private string tagObstaclesG = "ObstaclesG";
@@ -32,12 +39,14 @@ public class Player_Controller : MonoBehaviour
     private string tagElecObs = "ElectricObstacle";
     private string tagEnemy = "Enemy";
 
+    [Header("Bools")]
     public bool isOnGround;
     public bool isOnCeling;
     public bool isAlive;
     public bool startDragging;
     public bool isSlashing;
 
+    [Header("Score and Counts")]
     public int slashCount;
     public int pastDragger;
     public int kills;
@@ -45,11 +54,7 @@ public class Player_Controller : MonoBehaviour
     public int highestKills;
     public float highestScore;
 
-    public GameObject slashPrefab;
-    public Transform slashSpawnLoc;
-    public GameObject glitchPanel;
-
-    // TextMeshPro references
+    [Header("Text UI References")]
     public TextMeshProUGUI slashCountText;
     public TextMeshProUGUI pastDraggerText;
     public TextMeshProUGUI scoreText;
@@ -116,7 +121,7 @@ public class Player_Controller : MonoBehaviour
 
         if (isAlive && !startDragging)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && IsClickOnLeftSide())
             {
                 if (isOnGround)
                 {
@@ -136,16 +141,38 @@ public class Player_Controller : MonoBehaviour
 
             if (Input.GetMouseButtonDown(1))
             {
-                if (slashCount > 0)
-                {
-                    playerAnim.SetTrigger("willHit");
-                    playerAudioSrc.clip = slashSfx;
-                    playerAudioSrc.Play();
-                    GameObject slash = Instantiate(slashPrefab, slashSpawnLoc.position, Quaternion.identity);
-                    slash.GetComponent<slashBehaviour>().playerController = this;
-                    slashCount--;
-                }
+                fire();
             }
+        }
+    }
+
+    private bool IsClickOnLeftSide()
+    {
+        // Check if the input is from a touch device
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            return touch.position.x < Screen.width / 2;
+        }
+        // Check if the input is from a mouse click
+        else if (Input.GetMouseButtonDown(0))
+        {
+            return Input.mousePosition.x < Screen.width / 2;
+        }
+        return false;
+    }
+
+
+    public void fire()
+    {
+        if (slashCount > 0)
+        {
+            playerAnim.SetTrigger("willHit");
+            playerAudioSrc.clip = slashSfx;
+            playerAudioSrc.Play();
+            GameObject slash = Instantiate(slashPrefab, slashSpawnLoc.position, Quaternion.identity);
+            slash.GetComponent<slashBehaviour>().playerController = this;
+            slashCount--;
         }
     }
 
@@ -204,7 +231,15 @@ public class Player_Controller : MonoBehaviour
 
     private void Dragger()
     {
-        if (pastDragger > 2 && Input.GetMouseButtonDown(2) && isAlive)
+        if (Input.GetMouseButtonDown(2) && isAlive)
+        {
+            changeTime();
+        }
+    }
+
+    public void changeTime()
+    {
+        if (pastDragger > 2 && isAlive)
         {
             glitchPanel.SetActive(true);
             playerAudioSrc.clip = rewindSfx;

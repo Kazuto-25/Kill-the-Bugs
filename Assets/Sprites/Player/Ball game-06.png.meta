@@ -127,11 +127,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 230
-        y: 565
-        width: 1726
-        height: 598
+        y: 580
+        width: 869
+        height: 583
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,11 +148,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1987
-        y: 565
-        width: 2140
-        height: 607
+        y: 573
+        width: 1051
+        height: 599
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
         width: 2060
         height: 626
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,7 +194,7 @@ TextureImporter:
         width: 2050
         height: 692
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,12 +210,12 @@ TextureImporter:
       name: Ball game-06_4
       rect:
         serializedVersion: 2
-        x: 8429
-        y: 527
+        x: 8444
+        y: 534
         width: 2087
         height: 673
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,7 +236,7 @@ TextureImporter:
         width: 1810
         height: 673
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
